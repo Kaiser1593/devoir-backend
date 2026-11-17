@@ -1,0 +1,10 @@
+{% extends "stock/base.html" %}
+{% block content %}
+<h1>Confirmer la suppression</h1>
+<form method="post" class="card">
+  {% csrf_token %}
+  <p>Supprimer définitivement <b>{{ objet }}</b> ?</p>
+  <button class="btn danger">Supprimer</button>
+  <a class="btn sec" href="{% url retour %}">Annuler</a>
+</form>
+{% endblock %}

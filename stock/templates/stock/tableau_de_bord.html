@@ -1,0 +1,23 @@
+{% extends "stock/base.html" %}
+{% block content %}
+<h1>Tableau de bord</h1>
+<div class="grid">
+  <div class="card stat"><b>{{ nb_produits }}</b><span>produits</span></div>
+  <div class="card stat"><b>{{ nb_categories }}</b><span>catégories</span></div>
+  <div class="card stat"><b>{{ alertes|length }}</b><span>produits en alerte</span></div>
+  <div class="card stat"><b>{{ valeur_totale|floatformat:2 }} €</b><span>valeur du stock</span></div>
+</div>
+
+<div class="card">
+  <h2>⚠️ Alertes de stock</h2>
+  {% for p in alertes %}
+    <p><a href="{{ p.get_absolute_url }}">{{ p.nom }}</a> — <span class="badge alerte">{{ p.quantite }} restant(s)</span> (seuil {{ p.seuil_alerte }})</p>
+  {% empty %}<p>Aucune alerte.</p>{% endfor %}
+</div>
+
+<div class="card">
+  <div class="toolbar"><h2 style="margin:0">Derniers mouvements</h2><span class="spacer"></span>
+    <a class="btn" href="{% url 'mouvement_creer' %}">+ Mouvement</a></div>
+  {% include "stock/_mouvements.html" with mouvements=derniers %}
+</div>
+{% endblock %}

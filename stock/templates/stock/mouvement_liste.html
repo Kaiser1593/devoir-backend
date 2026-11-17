@@ -1,0 +1,12 @@
+{% extends "stock/base.html" %}
+{% block content %}
+<h1>Mouvements de stock</h1>
+<div class="toolbar">
+  <a class="btn sec" href="?">Tous</a>
+  <a class="btn sec" href="?type=E">Entrées</a>
+  <a class="btn sec" href="?type=S">Sorties</a>
+  <span class="spacer"></span>
+  <a class="btn" href="{% url 'mouvement_creer' %}">+ Mouvement</a>
+</div>
+{% include "stock/_mouvements.html" %}
+{% endblock %}
