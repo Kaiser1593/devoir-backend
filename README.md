@@ -5,6 +5,8 @@ avec interface web, API REST (Django REST Framework), import/export JSON et XML.
 
 **Technologies** : Python 3.12+, Django, Django REST Framework, SQLite, HTML/CSS, JavaScript (`fetch`).
 
+**Dépendances** : uniquement Django et Django REST Framework (voir `requirements.txt`). Aucune bibliothèque supplémentaire n'est utilisée : l'analyse JSON/XML repose sur la bibliothèque standard (`json`, `xml.etree`).
+
 ## Fonctionnalités
 
 - **Livres** : catalogue paginé, recherche (titre, auteur, ISBN), filtre « disponibles », tri, détail avec historique, création / modification / suppression.
