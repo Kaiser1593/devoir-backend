@@ -1,0 +1,41 @@
+{% extends 'catalogue/base.html' %}
+{% block title %}Livres{% endblock %}
+{% block content %}
+<div class="toolbar">
+  <h1>Catalogue</h1>
+  <a class="btn" href="{% url 'livre-create' %}">+ Nouveau livre</a>
+</div>
+
+{# Fonctionne sans JavaScript (GET classique) ; app.js le transforme en recherche AJAX. #}
+<form id="form-recherche" method="get" class="filters"
+      data-api="/api/livres/" data-detail-url="{% url 'livre-detail' 0 %}">
+  <input type="search" name="q" id="q" value="{{ q }}" placeholder="Titre, auteur ou ISBN…" autocomplete="off">
+  <label><input type="checkbox" name="dispo" id="dispo" value="1" {% if dispo %}checked{% endif %}> Disponibles uniquement</label>
+  <button type="submit" class="btn">Rechercher</button>
+</form>
+<p id="compteur" aria-live="polite">{{ paginator.count }} résultat{{ paginator.count|pluralize }}</p>
+
+<table>
+  <thead>
+    <tr>
+      <th><a href="?{% if q %}q={{ q|urlencode }}&{% endif %}{% if dispo %}dispo=1&{% endif %}tri={% if tri == 'titre' %}-{% endif %}titre">Titre</a></th>
+      <th><a href="?{% if q %}q={{ q|urlencode }}&{% endif %}{% if dispo %}dispo=1&{% endif %}tri={% if tri == 'auteur' %}-{% endif %}auteur">Auteur</a></th>
+      <th><a href="?{% if q %}q={{ q|urlencode }}&{% endif %}{% if dispo %}dispo=1&{% endif %}tri={% if tri == 'annee' %}-{% endif %}annee">Année</a></th>
+      <th>Disponibilité</th>
+    </tr>
+  </thead>
+  <tbody id="livres-tbody">
+    {% for livre in object_list %}
+    <tr>
+      <td><a href="{% url 'livre-detail' livre.pk %}">{{ livre.titre }}</a></td>
+      <td>{{ livre.auteur }}</td>
+      <td>{{ livre.annee_publication|default_if_none:"—" }}</td>
+      <td><span class="badge {% if livre.disponibles > 0 %}ok{% else %}ko{% endif %}">{{ livre.disponibles }} / {{ livre.exemplaires }}</span></td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="4">Aucun livre ne correspond.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% include 'catalogue/_pagination.html' %}
+{% endblock %}

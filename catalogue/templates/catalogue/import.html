@@ -1,0 +1,16 @@
+{% extends 'catalogue/base.html' %}
+{% block title %}Import{% endblock %}
+{% block content %}
+<h1>Importer des livres (JSON / XML)</h1>
+<p>Les livres sont créés ou mis à jour d'après leur ISBN. Voir <code>data/livres.json</code> et <code>data/livres.xml</code> pour le format.</p>
+<form method="post" enctype="multipart/form-data" novalidate>
+  {% csrf_token %}
+  {% include 'catalogue/_form_errors.html' %}
+  <button type="submit" class="btn">Importer</button>
+</form>
+{% if rapport %}
+  <h2>Rapport</h2>
+  <p>{{ rapport.crees }} créé(s), {{ rapport.mis_a_jour }} mis à jour, {{ rapport.erreurs|length }} erreur(s).</p>
+  {% if rapport.erreurs %}<ul class="errorlist">{% for e in rapport.erreurs %}<li>{{ e }}</li>{% endfor %}</ul>{% endif %}
+{% endif %}
+{% endblock %}

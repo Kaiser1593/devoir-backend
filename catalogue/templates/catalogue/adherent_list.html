@@ -1,0 +1,17 @@
+{% extends 'catalogue/base.html' %}
+{% block title %}Adhérents{% endblock %}
+{% block content %}
+<div class="toolbar"><h1>Adhérents</h1><a class="btn" href="{% url 'adherent-create' %}">+ Nouvel adhérent</a></div>
+<table>
+  <thead><tr><th>Nom</th><th>E-mail</th><th>Inscrit le</th><th></th></tr></thead>
+  <tbody>
+  {% for a in object_list %}
+    <tr>
+      <td><a href="{% url 'adherent-detail' a.pk %}">{{ a }}</a></td><td>{{ a.email }}</td>
+      <td>{{ a.date_inscription|date:"d/m/Y" }}</td>
+      <td><a href="{% url 'adherent-update' a.pk %}">Modifier</a> · <a href="{% url 'adherent-delete' a.pk %}">Supprimer</a></td>
+    </tr>
+  {% empty %}<tr><td colspan="4">Aucun adhérent.</td></tr>{% endfor %}
+  </tbody>
+</table>
+{% endblock %}

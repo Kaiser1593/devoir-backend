@@ -1,0 +1,10 @@
+{
+  "livres": [
+    {"isbn": "9780000000011", "titre": "Les Misérables", "auteur": {"prenom": "Victor", "nom": "Hugo"}, "annee": 1862, "exemplaires": 2, "resume": "Jean Valjean, ancien forçat, tente de se racheter dans la France du XIXe siècle."},
+    {"isbn": "9780000000028", "titre": "Notre-Dame de Paris", "auteur": {"prenom": "Victor", "nom": "Hugo"}, "annee": 1831, "exemplaires": 1, "resume": "Quasimodo, Esmeralda et Frollo autour de la cathédrale."},
+    {"isbn": "9780000000035", "titre": "Vingt mille lieues sous les mers", "auteur": {"prenom": "Jules", "nom": "Verne"}, "annee": 1870, "exemplaires": 3, "resume": "Le capitaine Nemo et son sous-marin, le Nautilus."},
+    {"isbn": "9780000000042", "titre": "Le Tour du monde en quatre-vingts jours", "auteur": {"prenom": "Jules", "nom": "Verne"}, "annee": 1872, "exemplaires": 2, "resume": "Phileas Fogg parie qu'il peut faire le tour du monde en 80 jours."},
+    {"isbn": "9780000000059", "titre": "Le Comte de Monte-Cristo", "auteur": {"prenom": "Alexandre", "nom": "Dumas"}, "annee": 1844, "exemplaires": 1, "resume": "Edmond Dantès prépare sa vengeance après des années de prison."},
+    {"isbn": "9780000000066", "titre": "Germinal", "auteur": {"prenom": "Émile", "nom": "Zola"}, "annee": 1885, "exemplaires": 2, "resume": "La grève des mineurs dans le nord de la France."}
+  ]
+}

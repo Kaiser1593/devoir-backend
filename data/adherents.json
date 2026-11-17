@@ -1,0 +1,8 @@
+{
+  "adherents": [
+    {"prenom": "Camille", "nom": "Durand", "email": "camille.durand@example.com"},
+    {"prenom": "Samir", "nom": "Benali", "email": "samir.benali@example.com"},
+    {"prenom": "Léa", "nom": "Martin", "email": "lea.martin@example.com"},
+    {"prenom": "Hugo", "nom": "Petit", "email": "hugo.petit@example.com"}
+  ]
+}

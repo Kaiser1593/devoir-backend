@@ -1,0 +1,11 @@
+{% extends 'catalogue/base.html' %}
+{% block title %}{{ titre }}{% endblock %}
+{% block content %}
+<h1>{{ titre }}</h1>
+<p>Voulez-vous vraiment supprimer <strong>{{ object }}</strong> ? Cette action est définitive.</p>
+<form method="post">
+  {% csrf_token %}
+  <button type="submit" class="btn danger">Oui, supprimer</button>
+  <a href="javascript:history.back()">Annuler</a>
+</form>
+{% endblock %}

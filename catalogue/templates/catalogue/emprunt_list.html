@@ -1,0 +1,34 @@
+{% extends 'catalogue/base.html' %}
+{% block title %}Emprunts{% endblock %}
+{% block content %}
+<div class="toolbar"><h1>Emprunts</h1><a class="btn" href="{% url 'emprunt-create' %}">+ Nouvel emprunt</a></div>
+<p class="filters">
+  Filtrer :
+  <a href="?" {% if not statut %}class="actif"{% endif %}>Tous</a> ·
+  <a href="?statut=en_cours" {% if statut == 'en_cours' %}class="actif"{% endif %}>En cours</a> ·
+  <a href="?statut=retards" {% if statut == 'retards' %}class="actif"{% endif %}>En retard</a> ·
+  <a href="?statut=rendus" {% if statut == 'rendus' %}class="actif"{% endif %}>Rendus</a>
+</p>
+<table>
+  <thead><tr><th>Livre</th><th>Adhérent</th><th>Emprunté le</th><th>Retour prévu</th><th>Statut</th><th></th></tr></thead>
+  <tbody>
+  {% for e in object_list %}
+    <tr id="emprunt-{{ e.pk }}" {% if e.est_en_retard %}class="retard"{% endif %}>
+      <td><a href="{% url 'livre-detail' e.livre.pk %}">{{ e.livre.titre|truncatechars:40 }}</a></td>
+      <td><a href="{% url 'adherent-detail' e.adherent.pk %}">{{ e.adherent }}</a></td>
+      <td>{{ e.date_emprunt|date:"d/m/Y" }}</td>
+      <td>{{ e.date_retour_prevue|date:"d/m/Y" }}</td>
+      <td class="statut">{% if e.est_en_cours %}{% if e.est_en_retard %}En retard{% else %}En cours{% endif %}{% else %}Rendu le {{ e.date_retour|date:"d/m/Y" }}{% endif %}</td>
+      <td class="actions">
+        {% if e.est_en_cours %}
+        <form method="post" action="{% url 'emprunt-retour' e.pk %}" class="form-retour" data-api="/api/emprunts/{{ e.pk }}/retour/">
+          {% csrf_token %}<button type="submit" class="btn small">Retourner</button>
+        </form>
+        {% endif %}
+      </td>
+    </tr>
+  {% empty %}<tr><td colspan="6">Aucun emprunt.</td></tr>{% endfor %}
+  </tbody>
+</table>
+{% include 'catalogue/_pagination.html' %}
+{% endblock %}

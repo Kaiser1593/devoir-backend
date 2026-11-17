@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bibliotheque>
+  <livre isbn="9780000000073">
+    <titre>Le Malade imaginaire</titre>
+    <auteur><prenom>Jean-Baptiste</prenom><nom>Molière</nom></auteur>
+    <annee>1673</annee>
+    <exemplaires>2</exemplaires>
+    <resume>Argan, hypocondriaque, veut marier sa fille à un médecin.</resume>
+  </livre>
+  <livre isbn="9780000000080">
+    <titre>Le Bourgeois gentilhomme</titre>
+    <auteur><prenom>Jean-Baptiste</prenom><nom>Molière</nom></auteur>
+    <annee>1670</annee>
+    <exemplaires>1</exemplaires>
+    <resume>Monsieur Jourdain rêve de devenir noble.</resume>
+  </livre>
+  <livre isbn="9780000000097">
+    <titre>Les Trois Mousquetaires</titre>
+    <auteur><prenom>Alexandre</prenom><nom>Dumas</nom></auteur>
+    <annee>1844</annee>
+    <exemplaires>3</exemplaires>
+    <resume>D'Artagnan rejoint les mousquetaires du roi.</resume>
+  </livre>
+  <livre isbn="9780000000103">
+    <titre>De la Terre à la Lune</titre>
+    <auteur><prenom>Jules</prenom><nom>Verne</nom></auteur>
+    <annee>1865</annee>
+    <exemplaires>1</exemplaires>
+    <resume></resume>
+  </livre>
+</bibliotheque>

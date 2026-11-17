@@ -1,0 +1,20 @@
+{% extends 'catalogue/base.html' %}
+{% block content %}
+<h1>Tableau de bord</h1>
+<div class="cards">
+  <a class="card" href="{% url 'livre-list' %}"><strong>{{ nb_livres }}</strong> livre{{ nb_livres|pluralize }}</a>
+  <a class="card" href="{% url 'adherent-list' %}"><strong>{{ nb_adherents }}</strong> adhérent{{ nb_adherents|pluralize }}</a>
+  <a class="card" href="{% url 'emprunt-list' %}?statut=en_cours"><strong>{{ nb_en_cours }}</strong> emprunt{{ nb_en_cours|pluralize }} en cours</a>
+</div>
+
+<h2>Retards</h2>
+{% for e in retards %}
+  <p class="retard">
+    <a href="{% url 'livre-detail' e.livre.pk %}">{{ e.livre.titre }}</a> — {{ e.adherent }},
+    prévu le {{ e.date_retour_prevue|date:"d/m/Y" }}
+    ({{ e.date_retour_prevue|timesince }} de retard)
+  </p>
+{% empty %}
+  <p>Aucun retard 🎉</p>
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'catalogue/base.html' %}
+{% block title %}{{ object.titre }}{% endblock %}
+{% block content %}
+{% with livre=object %}
+<div class="toolbar">
+  <h1>{{ livre.titre }}</h1>
+  <span>
+    <a class="btn" href="{% url 'livre-update' livre.pk %}">Modifier</a>
+    <a class="btn danger" href="{% url 'livre-delete' livre.pk %}">Supprimer</a>
+  </span>
+</div>
+<dl>
+  <dt>Auteur</dt><dd>{{ livre.auteur }}</dd>
+  <dt>ISBN</dt><dd>{{ livre.isbn }}</dd>
+  <dt>Année</dt><dd>{{ livre.annee_publication|default_if_none:"—" }}</dd>
+  <dt>Exemplaires</dt>
+  <dd>{{ livre.disponibles }} disponible{{ livre.disponibles|pluralize }} sur {{ livre.exemplaires }}</dd>
+</dl>
+
+{% if livre.resume %}
+  <button type="button" class="btn" data-toggle="resume">Afficher le résumé</button>
+  <div id="resume" hidden><p>{{ livre.resume|linebreaksbr }}</p></div>
+{% endif %}
+
+<h2>Historique des emprunts</h2>
+<table>
+  <thead><tr><th>Adhérent</th><th>Emprunté le</th><th>Retour prévu</th><th>Rendu le</th></tr></thead>
+  <tbody>
+  {% for e in emprunts %}
+    <tr {% if e.est_en_retard %}class="retard"{% endif %}>
+      <td><a href="{% url 'adherent-detail' e.adherent.pk %}">{{ e.adherent }}</a></td>
+      <td>{{ e.date_emprunt|date:"d/m/Y" }}</td>
+      <td>{{ e.date_retour_prevue|date:"d/m/Y" }}</td>
+      <td>{{ e.date_retour|date:"d/m/Y"|default:"En cours" }}</td>
+    </tr>
+  {% empty %}
+    <tr><td colspan="4">Jamais emprunté.</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endwith %}
+{% endblock %}
